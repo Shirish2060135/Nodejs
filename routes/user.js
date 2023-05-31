@@ -5,4 +5,10 @@ router.get('/login',(req,res)=> res.render('login'));
 //register page
 router.get('/register',(req,res)=> res.render('Register'));
 
+// Register Handel
+router.post('/register',(req,res) =>{
+    console.log(req.body)
+    res.send('hello');
+}); 
+
 module.exports = router;
