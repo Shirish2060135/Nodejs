@@ -7,8 +7,34 @@ router.get('/register',(req,res)=> res.render('Register'));
 
 // Register Handel
 router.post('/register',(req,res) =>{
-    console.log(req.body)
-    res.send('hello');
-}); 
+    const {name, email, password, password2}= req.body;
+    let errors =[];
+    // check required field 
+    if(!name|| !email || !password|| !password2 ){
+        errors.push({msg:'Please fill in all fields'});
+    }
+    //check Password match
+    if(password !== password2){
+        errors.push({msg:'Password does not match'});
+    }
+    //check password length
+    if(password.length<6){
+        errors.push({msg:'Password should be at least 6 character'});
+    }
+    if(errors.length>0){
+        res.render('register',{
+         errors,
+         name,
+         email,
+         password,
+         password2
+        });
+    }
+    else{
+    res.send('Pass');
+    
+    }
+
+    }); 
 
 module.exports = router;
